@@ -1113,3 +1113,17 @@ p{text-wrap:pretty}
 .bc>*{min-width:0}
 .cat .meta{display:block}
 .cat .meta-2{opacity:.8;margin-top:1px}
+
+/* Redes sociales */
+.social{display:flex;gap:10px;align-items:center}
+.soc{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;transition:transform .25s var(--ease),background .25s,color .25s}
+.soc svg{width:19px;height:19px}
+.soc:hover{transform:translateY(-2px)}
+.f-social{margin-top:20px}
+.f-social .soc{background:rgba(255,255,255,.08);color:#cfe0ea;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.f-social .soc.instagram:hover{background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%);color:#fff;box-shadow:none}
+.f-social .soc.facebook:hover{background:#1877f2;color:#fff;box-shadow:none}
+.cp-social{margin-top:6px}
+.cp-social .soc{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);color:#fff}
+.cp-social .soc.instagram:hover{background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+.cp-social .soc.facebook:hover{background:#1877f2}

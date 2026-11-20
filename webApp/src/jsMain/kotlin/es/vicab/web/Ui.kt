@@ -121,3 +121,20 @@ fun Link(
 @Composable
 fun PhoneLink(attrs: AttrBuilderContext<HTMLAnchorElement>? = null, content: ContentBuilder<HTMLAnchorElement>) =
     A("tel:${Company.PHONE_TEL}", attrs, content)
+
+/** Iconos de redes sociales (solo las que tienen enlace configurado). */
+@Composable
+fun SocialLinks(css: String) {
+    if (SOCIAL_LINKS.isEmpty()) return
+    org.jetbrains.compose.web.dom.Div({ classes("social", css) }) {
+        SOCIAL_LINKS.forEach { s ->
+            A(s.url, {
+                classes("soc", s.icon)
+                target(ATarget.Blank)
+                attr("rel", "noopener")
+                attr("aria-label", "${s.name} · Vicab")
+                attr("title", s.name)
+            }) { Icon(s.icon) }
+        }
+    }
+}

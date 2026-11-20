@@ -298,6 +298,7 @@ internal val TRANSLATIONS: List<List<String>> = listOf(
     listOf("Aceite de teca para madera de exterior", "Oli de teca per a fusta d'exterior", "Kanpoko zurarentzako teka-olioa", "Aceite de teca para madeira de exterior", "Teak oil for exterior wood"),
     listOf("Ducasse: sistema corredero para puertas de vidrio", "Ducasse: sistema corredís per a portes de vidre", "Ducasse: beirazko ateentzako sistema irristagarria", "Ducasse: sistema corredío para portas de vidro", "Ducasse: sliding system for glass doors"),
     listOf("Borma Wachs: así trabaja la marca", "Borma Wachs: així treballa la marca", "Borma Wachs: horrela lan egiten du markak", "Borma Wachs: así traballa a marca", "Borma Wachs: how the brand works"),
+    listOf("Síguenos", "Segueix-nos", "Jarraitu gaitzazu", "Síguenos", "Follow us"),
     listOf("Lo que garantizamos a cada tienda que trabaja con nosotros, sin letra pequeña.", "El que garantim a cada botiga que treballa amb nosaltres, sense lletra petita.", "Gurekin lan egiten duen denda bakoitzari bermatzen dioguna, letra txikirik gabe.", "O que lle garantimos a cada tenda que traballa connosco, sen letra pequena.", "What we guarantee every shop that works with us, no small print."),
     listOf("Calidad certificada", "Qualitat certificada", "Kalitate ziurtatua", "Calidade certificada", "Certified quality"),
     listOf("CATAS, IBR y EN71", "CATAS, IBR i EN71", "CATAS, IBR eta EN71", "CATAS, IBR e EN71", "CATAS, IBR and EN71"),

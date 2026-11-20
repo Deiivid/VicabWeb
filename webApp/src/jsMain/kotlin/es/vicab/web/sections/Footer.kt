@@ -16,6 +16,7 @@ import es.vicab.web.FormMode
 import es.vicab.web.Icon
 import es.vicab.web.Link
 import es.vicab.web.PhoneLink
+import es.vicab.web.SocialLinks
 import es.vicab.web.reveal
 import es.vicab.web.storageGet
 import es.vicab.web.storageSet
@@ -67,6 +68,7 @@ fun SiteFooter() {
                     Span({ classes("f-logo") }) { Img("img/logo-web.png", "Vicab") }
                     P { Text(t("Distribución profesional de productos para el cuidado, la reparación y la decoración de la madera.")) }
                     Div({ classes("certs") }) { CERTIFICATIONS.forEach { Span { Text(it) } } }
+                    SocialLinks("f-social")
                 }
                 Div {
                     H4 { Text(t("Productos")) }

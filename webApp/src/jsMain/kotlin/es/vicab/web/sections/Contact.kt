@@ -17,6 +17,7 @@ import es.vicab.web.Icon
 import es.vicab.web.PROVINCES
 import es.vicab.web.PhoneLink
 import es.vicab.web.STEPS
+import es.vicab.web.SocialLinks
 import es.vicab.web.Link
 import es.vicab.web.reveal
 import es.vicab.web.t
@@ -111,6 +112,7 @@ private fun ContactPanel(distMode: Boolean) {
                     Text("08210 Barberà del Vallès (Barcelona)")
                 }
             }
+            InfoRow("globe", "Síguenos") { SocialLinks("cp-social") }
         }
         if (distMode) {
             Div({ classes("c-dist") }) {

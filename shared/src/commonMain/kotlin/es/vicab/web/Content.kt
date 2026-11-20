@@ -23,6 +23,10 @@ object Company {
 
     const val DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=41.5114197,2.1558118"
 
+    // Redes sociales. ⚑ CONFIGURAR: usuario de Instagram de Vicab (se muestra en cuanto tenga valor)
+    const val FACEBOOK_URL = "https://www.facebook.com/materialderetoque/"
+    val INSTAGRAM_URL: String? = null
+
     const val WA_INFO = "Hola, me gustaría recibir información sobre Vicab."
     const val WA_DEMO = "Hola, me gustaría pedir una demostración gratuita en mi tienda."
 
@@ -371,6 +375,16 @@ data class ContactRequest(
 
     val firstName: String get() = name.trim().substringBefore(' ')
 }
+
+// ---------------------------------------------------------------- Redes sociales
+
+data class SocialLink(val icon: String, val name: String, val url: String)
+
+/** Redes con enlace configurado (las que no tienen URL no se muestran). */
+val SOCIAL_LINKS: List<SocialLink> = listOfNotNull(
+    Company.INSTAGRAM_URL?.let { SocialLink("instagram", "Instagram", it) },
+    SocialLink("facebook", "Facebook", Company.FACEBOOK_URL),
+)
 
 // ---------------------------------------------------------------- Pie
 
