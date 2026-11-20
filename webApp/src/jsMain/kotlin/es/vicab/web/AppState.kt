@@ -16,6 +16,8 @@ object AppState {
         private set
     var formMode by mutableStateOf(FormMode.CALL)
     var mediaTab by mutableStateOf(MediaTab.CATALOGS)
+    /** Marca seleccionada en el filtro de catálogos (null = todas). */
+    var catalogBrand by mutableStateOf<String?>(null)
     var menuOpen by mutableStateOf(false)
     var openLangMenu by mutableStateOf<Int?>(null)
     var videoId by mutableStateOf<String?>(null)

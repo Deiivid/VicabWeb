@@ -59,6 +59,14 @@ class SharedTest {
     @Test
     fun everyCatalogKeyExists() {
         PRODUCT_LINES.forEach { assertTrue(catalog(it.catalogKey) != null, it.catalogKey) }
-        PARTNER_BRANDS.mapNotNull { it.catalogKey }.forEach { assertTrue(catalog(it) != null, it) }
+        PARTNER_BRANDS.forEach { b -> assertTrue(CATALOGS.any { it.brand == b.name }, b.name) }
+        assertEquals(CATALOGS.size, CATALOGS.map { it.key }.distinct().size)
+    }
+
+    @Test
+    fun catalogSizeLabels() {
+        assertEquals("15 MB", catalog("interior")!!.sizeLabel)
+        assertEquals("1,5 MB", catalog("mps")!!.sizeLabel)
+        assertEquals("296 KB", catalog("borma-profix")!!.sizeLabel)
     }
 }

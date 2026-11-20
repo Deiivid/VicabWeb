@@ -1089,3 +1089,27 @@ a.float-card:hover .fc-go{background:var(--magenta);color:#fff;transform:transla
 h1,h2,.h2{text-wrap:balance}
 p{text-wrap:pretty}
 .head.center .h2{max-width:22ch;margin-left:auto;margin-right:auto}
+
+/* Catálogos · filtros por marca, insignias y "ver todos" */
+.doc-filters{display:flex;flex-wrap:wrap;gap:8px;padding:2px;margin:0 0 22px}
+.doc-filters::-webkit-scrollbar{display:none}
+.doc-chip{flex:none;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 8px 0 14px;border-radius:999px;cursor:pointer;
+  border:1.5px solid var(--line);background:#fff;font:700 .8rem var(--head);color:var(--body);transition:all .2s}
+.doc-chip i{font-style:normal;min-width:22px;height:22px;padding:0 6px;border-radius:999px;display:grid;place-items:center;
+  background:var(--soft);font-size:.72rem;color:var(--muted)}
+.doc-chip:hover{border-color:var(--blue);color:var(--blue)}
+.doc-chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.doc-chip.on i{background:rgba(255,255,255,.18);color:#fff}
+.cat .cover{background:#f1f4f6}
+.doc-kind{position:absolute;z-index:2;left:20px;top:10px;padding:4px 9px;border-radius:999px;font:700 .64rem var(--head);
+  letter-spacing:.06em;text-transform:uppercase;background:var(--navy);color:#fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.4)}
+.doc-kind.sheet{background:#fff;color:var(--navy)}
+.doc-lang{position:absolute;z-index:2;right:10px;top:10px;padding:4px 7px;border-radius:6px;font:800 .64rem var(--head);background:#ffd400;color:#111}
+.cat h4{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bc-r .media-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:22px}
+.more-btn{display:inline-flex;align-items:center;gap:6px}
+.more-btn svg{width:15px;height:15px}
+.bmini{cursor:pointer;text-align:left;font:inherit;color:inherit}
+.bc>*{min-width:0}
+.cat .meta{display:block}
+.cat .meta-2{opacity:.8;margin-top:1px}

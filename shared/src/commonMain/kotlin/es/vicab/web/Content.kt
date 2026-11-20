@@ -110,26 +110,61 @@ val GOLDEN_RULES = listOf(
     Rule("handshake", "Vicab Club", "fidelización anual"),
 )
 
-// ---------------------------------------------------------------- Catálogos
+// ---------------------------------------------------------------- Catálogos y fichas
+
+/** Tipo de documento: catálogo completo o ficha/folleto de un producto. */
+enum class DocKind(val label: String) { CATALOG("Catálogo"), SHEET("Ficha técnica") }
 
 data class Catalog(
     val key: String,
     val title: String,
-    val viewerTitle: String,
     val brand: String,
-    val file: String,
-    val cover: String,
-    val sizeMb: Int,
+    val kind: DocKind,
+    val pages: Int,
+    val sizeKb: Int,
+    val viewerTitle: String = title,
+    /** Idioma del documento si no está en español. */
+    val language: String? = null,
+) {
+    val file: String get() = "catalogos/$key.pdf"
+    val cover: String get() = "img/portadas/$key.jpg"
+
+    /** "16 MB", "1,6 MB" o "300 KB". */
+    val sizeLabel: String
+        get() = when {
+            sizeKb >= 10_240 -> "${(sizeKb + 512) / 1024} MB"
+            sizeKb >= 1024 -> "${sizeKb / 1024},${(sizeKb % 1024) * 10 / 1024} MB"
+            else -> "$sizeKb KB"
+        }
+}
+
+/** Todos los catálogos y fichas publicados en vicab.es. */
+val CATALOGS = listOf(
+    Catalog("interior", "Línea Interior", "Borma Wachs", DocKind.CATALOG, 36, 15_788),
+    Catalog("exterior", "Línea Exterior", "Borma Wachs", DocKind.CATALOG, 40, 17_180),
+    Catalog("restauracion", "Restauración", "Borma Wachs", DocKind.CATALOG, 28, 8_132),
+    Catalog("retoque", "Retoque", "Borma Wachs", DocKind.CATALOG, 36, 3_056),
+    Catalog("serie-oro", "Serie Oro", "Borma Wachs", DocKind.CATALOG, 24, 3_708),
+    Catalog("borma-profix", "Profix · lápiz de retoque", "Borma Wachs", DocKind.SHEET, 2, 296),
+    Catalog("borma-cera-blanda", "Cera blanda de relleno", "Borma Wachs", DocKind.SHEET, 2, 760),
+    Catalog("borma-aceite-terraza", "Aceite de terraza", "Borma Wachs", DocKind.SHEET, 2, 436),
+    Catalog("mps", "Sierras MPS", "MPS", DocKind.CATALOG, 6, 1_616, viewerTitle = "Sierras oscilobatientes"),
+    Catalog("famag-bormax", "Bormax 2.0 · brocas", "Famag", DocKind.CATALOG, 148, 10_636, language = "DE"),
+    Catalog("famag-calidades", "Clasificación de calidades", "Famag", DocKind.SHEET, 1, 1_576),
+    Catalog("ducasse-madera", "Catálogo técnico · Madera", "Ducasse Industrial", DocKind.CATALOG, 29, 9_892),
+    Catalog("ducasse-vidrio", "Catálogo técnico · Vidrio", "Ducasse Industrial", DocKind.CATALOG, 19, 6_192),
+    Catalog("ducasse-d-slide", "D-Slide 60 · puertas correderas", "Ducasse Industrial", DocKind.SHEET, 2, 2_520),
+    Catalog("pizzi-0162", "Encoladora manual de listones", "Pizzi", DocKind.SHEET, 4, 216),
+    Catalog("pizzi-1094", "Depósito neumático de cola y barniz", "Pizzi", DocKind.SHEET, 4, 200),
+    Catalog("pizzi-9033", "Encoladora de dos cabezales", "Pizzi", DocKind.SHEET, 4, 208),
+    Catalog("pizzi-9068", "Encoladora de listones", "Pizzi", DocKind.SHEET, 2, 52),
+    Catalog("pizzi-9068a", "Encoladora de cantos con alimentador", "Pizzi", DocKind.SHEET, 2, 92),
+    Catalog("pizzi-9810", "Depósito neumático para adhesivo de contacto", "Pizzi", DocKind.SHEET, 4, 180),
+    Catalog("whale-spray", "Gama de sprays técnicos", "Whale Spray", DocKind.SHEET, 1, 168),
 )
 
-val CATALOGS = listOf(
-    Catalog("interior", "Línea Interior", "Línea Interior", "Borma Wachs", "catalogos/interior.pdf", "img/portadas/interior.jpg", 16),
-    Catalog("exterior", "Línea Exterior", "Línea Exterior", "Borma Wachs", "catalogos/exterior.pdf", "img/portadas/exterior.jpg", 17),
-    Catalog("restauracion", "Restauración", "Restauración", "Borma Wachs", "catalogos/restauracion.pdf", "img/portadas/restauracion.jpg", 8),
-    Catalog("retoque", "Retoque", "Retoque", "Borma Wachs", "catalogos/retoque.pdf", "img/portadas/retoque.jpg", 3),
-    Catalog("serie-oro", "Serie Oro", "Serie Oro", "Borma Wachs", "catalogos/serie-oro.pdf", "img/portadas/serie-oro.jpg", 4),
-    Catalog("mps", "Sierras MPS", "Sierras oscilobatientes", "MPS", "catalogos/mps.pdf", "img/portadas/mps.jpg", 2),
-)
+/** Marcas con documentos, en el orden de los filtros. */
+val CATALOG_BRANDS: List<String> = CATALOGS.map { it.brand }.distinct()
 
 fun catalog(key: String): Catalog? = CATALOGS.firstOrNull { it.key == key }
 
@@ -207,20 +242,19 @@ val BEFORE_AFTER = BeforeAfterPhotos(
 
 // ---------------------------------------------------------------- Marcas secundarias
 
-/** Marca con catálogo en PDF ([catalogKey]) o que se solicita por formulario. */
+/** Marca secundaria. Sus catálogos se filtran por [name] en la sección de catálogos. */
 data class PartnerBrand(
     val logo: String,
     val name: String,
     val category: String,
     val description: String,
-    val catalogKey: String? = null,
 )
 
 // ⚑ Confirmar las descripciones de Pizzi, Whale Spray y Ducasse con Vicab.
 val PARTNER_BRANDS = listOf(
-    PartnerBrand("img/marcas/mps.png", "MPS", "Corte", "Sierras y hojas de sierra alemanas para el trabajo profesional de la madera.", "mps"),
+    PartnerBrand("img/marcas/mps.png", "MPS", "Corte", "Sierras y hojas de sierra alemanas para el trabajo profesional de la madera."),
     PartnerBrand("img/marcas/famag.png", "Famag", "Perforación", "Brocas y fresas para madera fabricadas en Alemania desde 1865."),
-    PartnerBrand("img/marcas/pizzi.png", "Pizzi", "Herramienta", "Herramienta profesional para carpintería y trabajo de la madera."),
+    PartnerBrand("img/marcas/pizzi.png", "Pizzi", "Maquinaria", "Encoladoras y maquinaria profesional para carpintería y trabajo de la madera."),
     PartnerBrand("img/marcas/whale.png", "Whale Spray", "Sprays técnicos", "Sprays técnicos para limpieza, lubricación y mantenimiento. Empresa certificada ISO 9001 e ISO 14001."),
     PartnerBrand("img/marcas/ducasse.png", "Ducasse Industrial", "Herrajes", "Sistemas correderos y herrajes para puertas de madera y vidrio."),
 )
@@ -232,12 +266,18 @@ data class Video(val youtubeId: String, val category: String, val title: String,
         get() = "https://i.ytimg.com/vi/$youtubeId/${if (big) "maxresdefault" else "hqdefault"}.jpg"
 }
 
+/** Los vídeos publicados en vicab.es (el resto de la página de vídeos ya no existe en YouTube). */
 val VIDEOS = listOf(
     Video("2GazdMvEfwg", "Restauración", "Reparar madera con Ecostucco fibrorreforzado", big = true),
     Video("US98AYUTpeU", "Retoque", "Holzmasse: masilla de secado rápido"),
-    Video("eM7ytRJfQlI", "Decoración", "Efecto vintage en una mesita"),
     Video("8ReLIb2F4N0", "Interior", "Recrear un canto en roble con Hardwax"),
+    Video("PDsLicZDSwA", "Interior", "Efecto envejecido en parquet de roble"),
+    Video("eM7ytRJfQlI", "Decoración", "Efecto vintage en una mesita"),
     Video("u9uqJiRn8Bg", "Exterior", "Limpieza y aceite en borde de piscina"),
+    Video("6t2cMnKIG3o", "Exterior", "Holzwachs Lasur: protección para exterior"),
+    Video("fECi0vcMxag", "Exterior", "Aceite de teca para madera de exterior"),
+    Video("T9ur-rLJiIg", "Herrajes", "Ducasse: sistema corredero para puertas de vidrio"),
+    Video("F90JKJFs97A", "Empresa", "Borma Wachs: así trabaja la marca", big = true),
 )
 
 // ---------------------------------------------------------------- Opiniones (reales, de Google)
