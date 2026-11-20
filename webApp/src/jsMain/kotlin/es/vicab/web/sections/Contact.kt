@@ -16,6 +16,7 @@ import es.vicab.web.FormMode
 import es.vicab.web.Icon
 import es.vicab.web.PROVINCES
 import es.vicab.web.PhoneLink
+import es.vicab.web.STEPS
 import es.vicab.web.Link
 import es.vicab.web.reveal
 import es.vicab.web.t
@@ -52,6 +53,8 @@ import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Label
 import org.jetbrains.compose.web.dom.Option
 import org.jetbrains.compose.web.dom.P
+import org.jetbrains.compose.web.dom.Li
+import org.jetbrains.compose.web.dom.Ol
 import org.jetbrains.compose.web.dom.RadioInput
 import org.jetbrains.compose.web.dom.Section
 import org.jetbrains.compose.web.dom.Select
@@ -294,6 +297,24 @@ private fun ContactForm() {
             Small {
                 Icon("lock") { attr("width", "15"); attr("height", "15") }
                 Text(t("Tus datos están seguros"))
+            }
+        }
+        // El modo "llamada" tiene menos campos: se rellena el hueco con los pasos para que
+        // la tarjeta mida lo mismo en los tres modos
+        if (!mode.fullForm) NextSteps()
+    }
+}
+
+@Composable
+private fun NextSteps() {
+    Div({ classes("f-steps") }) {
+        H4 { Text(t("Cómo trabajamos")) }
+        Ol {
+            STEPS.forEachIndexed { i, step ->
+                Li {
+                    Span({ classes("fs-ic") }) { Icon(step.icon) }
+                    Div { B { Text("${i + 1}. " + t(step.title)) }; Small { Text(t(step.text)) } }
+                }
             }
         }
     }
