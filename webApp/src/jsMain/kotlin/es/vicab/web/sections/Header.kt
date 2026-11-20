@@ -30,7 +30,11 @@ fun SiteHeader() {
     }) {
         Div({ classes("wrap", "nav") }) {
             Link("#top", attrs = { classes("logo"); attr("aria-label", t("Vicab, inicio")) }) {
-                Img("img/logo-web.png", t("Vicab · Pasión por la madera"))
+                // Versiones ya reducidas a 1x/2x/3x: el navegador no tiene que encoger el logo grande y se ve nítido
+                Img("img/logo-header@2x.png", t("Vicab · Pasión por la madera")) {
+                    attr("srcset", "img/logo-header.png 1x, img/logo-header@2x.png 2x, img/logo-header@3x.png 3x")
+                    attr("width", "92"); attr("height", "62")
+                }
             }
             Nav({ classes("menu"); id("menu"); attr("aria-label", t("Principal")) }) {
                 NAV_LINKS.forEach { link ->
