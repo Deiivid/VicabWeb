@@ -28,11 +28,16 @@ object Dom {
         io.observe(el)
     }
 
+    /**
+     * Muestra [el] con animación al entrar en pantalla.
+     * Se marca con el atributo `data-in` y no con una clase: Compose reescribe la lista de clases
+     * cuando cambia el estado (p. ej. el modo del formulario) y borraría una clase añadida a mano.
+     */
     fun revealOnScroll(el: Element) {
-        observeOnce(el, threshold = 0.12, rootMargin = "0px 0px -40px 0px") { it.classList.add("in") }
+        observeOnce(el, threshold = 0.12, rootMargin = "0px 0px -40px 0px") { it.setAttribute("data-in", "") }
         // Lo que ya está en pantalla al cargar se muestra al momento
         window.requestAnimationFrame {
-            if (rect(el).top < window.innerHeight) el.classList.add("in")
+            if (rect(el).top < window.innerHeight) el.setAttribute("data-in", "")
         }
     }
 
