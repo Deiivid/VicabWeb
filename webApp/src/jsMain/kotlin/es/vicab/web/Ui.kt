@@ -129,7 +129,7 @@ fun SocialLinks(css: String) {
     org.jetbrains.compose.web.dom.Div({ classes("social", css) }) {
         SOCIAL_LINKS.forEach { s ->
             A(s.url, {
-                classes("soc", s.icon)
+                classes("soc", "soc-${s.icon}")
                 target(ATarget.Blank)
                 attr("rel", "noopener")
                 attr("aria-label", "${s.name} · Vicab")

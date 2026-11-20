@@ -382,6 +382,7 @@ data class SocialLink(val icon: String, val name: String, val url: String)
 
 /** Redes con enlace configurado (las que no tienen URL no se muestran). */
 val SOCIAL_LINKS: List<SocialLink> = listOfNotNull(
+    SocialLink("wa", "WhatsApp", Company.whatsappUrl(Company.WA_INFO)),
     Company.INSTAGRAM_URL?.let { SocialLink("instagram", "Instagram", it) },
     SocialLink("facebook", "Facebook", Company.FACEBOOK_URL),
 )

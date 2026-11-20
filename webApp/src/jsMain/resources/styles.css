@@ -1114,16 +1114,17 @@ p{text-wrap:pretty}
 .cat .meta{display:block}
 .cat .meta-2{opacity:.8;margin-top:1px}
 
-/* Redes sociales */
-.social{display:flex;gap:10px;align-items:center}
-.soc{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;transition:transform .25s var(--ease),background .25s,color .25s}
-.soc svg{width:19px;height:19px}
-.soc:hover{transform:translateY(-2px)}
-.f-social{margin-top:20px}
-.f-social .soc{background:rgba(255,255,255,.08);color:#cfe0ea;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
-.f-social .soc.instagram:hover{background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%);color:#fff;box-shadow:none}
-.f-social .soc.facebook:hover{background:#1877f2;color:#fff;box-shadow:none}
-.cp-social{margin-top:6px}
-.cp-social .soc{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);color:#fff}
-.cp-social .soc.instagram:hover{background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
-.cp-social .soc.facebook:hover{background:#1877f2}
+/* Redes sociales · iconos redondos con el color de cada marca (como el botón de WhatsApp) */
+.social{display:flex;gap:12px;align-items:center}
+.soc{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.45);transition:transform .25s var(--ease),box-shadow .25s,filter .25s}
+.soc svg{width:22px;height:22px}
+.soc:hover{transform:translateY(-3px) scale(1.06);filter:brightness(1.08);box-shadow:0 14px 26px -10px rgba(0,0,0,.55)}
+.soc-wa{background:#25d366}
+.soc-facebook{background:#1877f2}
+.soc-instagram{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+.soc-facebook svg{width:24px;height:24px}
+.f-social{margin-top:22px}
+.cp-social{margin-top:8px}
+.cp-social .soc{width:40px;height:40px}
+.cp-social .soc svg{width:20px;height:20px}
