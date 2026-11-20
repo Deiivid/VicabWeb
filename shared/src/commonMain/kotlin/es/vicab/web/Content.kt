@@ -23,9 +23,9 @@ object Company {
 
     const val DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=41.5114197,2.1558118"
 
-    // Redes sociales. ⚑ CONFIGURAR: usuario de Instagram de Vicab (se muestra en cuanto tenga valor)
+    // Redes sociales (una red sin URL no se muestra)
     const val FACEBOOK_URL = "https://www.facebook.com/materialderetoque/"
-    val INSTAGRAM_URL: String? = null
+    val INSTAGRAM_URL: String? = "https://www.instagram.com/vicab.oficial/"
 
     const val WA_INFO = "Hola, me gustaría recibir información sobre Vicab."
     const val WA_DEMO = "Hola, me gustaría pedir una demostración gratuita en mi tienda."
