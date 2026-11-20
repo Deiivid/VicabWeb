@@ -1057,3 +1057,11 @@ button{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){.rev-track,.rev-slider .rev{transition:none}}
 .qa>*{min-width:0}
 .rev-slider{width:100%}
+
+/* Tarjetas flotantes de la portada: ahora son enlaces */
+a.float-card{cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+a.float-card:hover{transform:translateY(-3px);box-shadow:0 30px 60px -24px rgba(0,33,58,.55)}
+.float-card .fc-go{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;margin-left:4px;
+  background:var(--soft);color:var(--navy);transition:background .3s,color .3s,transform .3s var(--ease)}
+.float-card .fc-go svg{width:15px;height:15px}
+a.float-card:hover .fc-go{background:var(--magenta);color:#fff;transform:translateX(2px)}

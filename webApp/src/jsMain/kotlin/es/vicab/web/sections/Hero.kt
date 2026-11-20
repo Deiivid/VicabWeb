@@ -87,8 +87,8 @@ fun Hero() {
                         FigCaption { Text(t(photo.caption)) }
                     }
                 }
-                FloatCard("fc-1", "calendar", "Demostración gratuita", "En tu tienda, sin compromiso")
-                FloatCard("fc-2", "award", "+15 años", "en el sector de la madera")
+                FloatCard("fc-1", "calendar", "Demostración gratuita", "En tu tienda, sin compromiso", "#contacto", FormMode.DEMO)
+                FloatCard("fc-2", "award", "+15 años", "en el sector de la madera", "#normas")
             }
         }
         Div({ classes("wrap", "hero-brands"); reveal(3) }) {
@@ -110,11 +110,13 @@ fun Hero() {
     }
 }
 
+/** Tarjeta flotante de la portada; es un enlace (a la demo o a las normas de oro). */
 @Composable
-private fun FloatCard(css: String, icon: String, title: String, subtitle: String) {
-    Div({ classes("float-card", css) }) {
+private fun FloatCard(css: String, icon: String, title: String, subtitle: String, href: String, mode: FormMode? = null) {
+    Link(href, mode = mode, attrs = { classes("float-card", css) }) {
         Span({ classes("ic") }) { Icon(icon) }
         Span { B { Text(t(title)) }; Span { Text(t(subtitle)) } }
+        Span({ classes("fc-go") }) { Icon("arrow-r") }
     }
 }
 
